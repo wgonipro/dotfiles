@@ -1,0 +1,20 @@
+[credential]
+	helper = store
+[user]
+	email = william@goforward.com
+	name = William
+[hub]
+	protocol = https
+	host = goforward
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
+[alias]
+	st = status
+	cm = commit
+	br = branch
+	co = checkout
+	p = pull
+[core]
+	autocrlf = input
+[init]
+	defaultBranch = main
