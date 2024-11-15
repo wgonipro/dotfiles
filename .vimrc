@@ -68,12 +68,14 @@ set shiftwidth=4
 set autoindent
 set textwidth=80
 set updatetime=100
-set splitright
+set autoread
+set backspace=indent,eol,start
 
 
 set showcmd
 set nu
 set ruler
+set re=0
 syn on
 
 au BufRead,BufNewFile *.txt syntax match StrikeoutMatch /\~\~.*\~\~/
@@ -82,6 +84,9 @@ hi link StrikeoutMatch StrikeoutColor
 
 " color scheme
 colo iceberg
+
+" auto NERDTree
+autocmd VimEnter * NERDTree
 
 " copilot - linux / mac
 " git clone https://github.com/github/copilot.vim.git \

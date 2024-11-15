@@ -16,12 +16,16 @@ export REPOS="/Users/williamgoniprow/Documents/goforward-repos"
 export GOREPOS="${HOME}/go/src/github.com/goforward"
 export PATH="$PATH:/usr/local/bin/docker"
 export PATH="$PATH:$HOME/go/bin/grpc-server-scaffold"
-source '/usr/local/Cellar/rbenv/1.2.0/libexec/../completions/rbenv.zsh'
+export PATH="$PATH:$HOME/Documents/git-secrets"
+source '/usr/local/Cellar/rbenv/1.3.0/completions/rbenv.bash'
 alias cd_repos="cd $REPOS"
 alias cd_go="cd $GOREPOS"
 alias xslt="saxon"
+alias :q="exit"
+alias :bd="exit"
+alias python="python3"
 
-## Common Forward API Endpoints
+## Common API Endpoints
 export AUTH_REST="https://auth.api.goforward.com"
 export MONEY_REST="https://money.api.goforward.com"
 export WORKFLOW_REST="https://workflow.api.goforward.com"
@@ -60,8 +64,7 @@ eval "$(pyenv init -)"
 # Airport Custom Setup #
 ####################################################################################################
 
-# MacOS if airport if needed
-# ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/local/bin/airport
+ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/local/bin/airport
 
 ####################################################################################################
 # ngrok Custom Setup #
@@ -70,6 +73,10 @@ eval "$(pyenv init -)"
 export PATH="$PATH:/usr/local/bin/ngrok"
 
 ####################################################################################################
+
+# This likely can be deleted if you are no longer using Papercups
+# source $(brew --prefix asdf)/asdf.sh
+# export PATH=/usr/local/opt/openssl@1.1/bin:$PATH
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
