@@ -6,17 +6,27 @@ endif
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
+" set shell=zsh
+" set spell spelllang=en_ca
 
 call plug#begin()
 " color theme iceberg
-Plug 'cocopon/iceberg.vim'
+" Plug 'cocopon/iceberg.vim'
+Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 
 " airline for better experience
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " vim-go
-Plug 'fatih/vim-go'
+" Plug 'fatih/vim-go'
+
+" vim-surround
+Plug 'tpope/vim-surround'
+
+" vim-ruby
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rails'
 
 " github plug
 Plug 'tpope/vim-fugitive'
@@ -30,11 +40,17 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " NERDTree
 Plug 'preservim/nerdtree'
 
+" CoPilot
+Plug 'github/copilot.vim'
+
+" Markdown Preview
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
+
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 
 " Put your non-Plugin stuff after this line
-let g:airline_theme='iceberg'
+let g:airline_theme='angr'
 let g:airline#extensions#tabline#enabled = 1
 
 " disable all linters as that is taken care by coc
@@ -62,7 +78,7 @@ let g:go_highlight_generate_tags = 1
 
 " Non-Plugin Attributes
 set expandtab
-set tabstop=4
+set tabstop=2
 set softtabstop=4
 set shiftwidth=4
 set autoindent
@@ -77,16 +93,17 @@ set nu
 set ruler
 set re=0
 syn on
+set re=2
 
 au BufRead,BufNewFile *.txt syntax match StrikeoutMatch /\~\~.*\~\~/
 hi def StrikeoutColor ctermbg=black ctermfg=grey guibg=darkblue guifg=blue
 hi link StrikeoutMatch StrikeoutColor
 
 " color scheme
-colo iceberg
+" colo iceberg
 
 " auto NERDTree
-autocmd VimEnter * NERDTree
+" autocmd VimEnter * NERDTree
 
 " copilot - linux / mac
 " git clone https://github.com/github/copilot.vim.git \
