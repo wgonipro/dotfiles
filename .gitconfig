@@ -5,7 +5,7 @@
 	name = William
 [hub]
 	protocol = https
-	host = goforward
+	host = pairteam
 [url "ssh://git@github.com/"]
 	insteadOf = https://github.com/
 [alias]

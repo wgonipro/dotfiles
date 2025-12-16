@@ -1,50 +1,60 @@
+autoload -Uz compinit
+compinit
+export PATH="$PATH:/opt/homebrew/bin/brew"
 export GITHUB_USERNAME=wgonipro
 export HOMEBREW_GITHUB_API_TOKEN=$(cat ~/.secret/gh)
 export GH_TOKEN=$HOMEBREW_GITHUB_API_TOKEN
 export GITHUB_TOKEN=$GH_TOKEN
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
-export GO_PKG_NAME="go@1.17"
-export GOPATH="$HOME/go"
-export GOROOT="$(brew --prefix ${GO_PKG_NAME})/libexec"
-export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
-export PATH="/Users/williamgoniprow/.rbenv/shims:${PATH}"
+export NGROK_URL="https://worpinog.ngrok.app"
 export PATH="/usr/local/opt/nodejs:${PATH}"
-export PATH="/Users/williamgoniprow/Documents/goforward-repos/infrastructure/scripts:${PATH}" # If stuff is broken - likely here
-export INFRA_PATH="/Users/williamgoniprow/Documents/goforward-repos/infrastructure" # Or here
-export RBENV_SHELL=zsh
-export REPOS="/Users/williamgoniprow/Documents/goforward-repos"
-export GOREPOS="${HOME}/go/src/github.com/goforward"
+export REPOS="/Users/williamgoniprow/Repos"
 export PATH="$PATH:/usr/local/bin/docker"
 export PATH="$PATH:$HOME/go/bin/grpc-server-scaffold"
-export PATH="$PATH:$HOME/Documents/git-secrets"
-source '/usr/local/Cellar/rbenv/1.3.0/completions/rbenv.bash'
 alias cd_repos="cd $REPOS"
-alias cd_go="cd $GOREPOS"
-alias xslt="saxon"
 alias :q="exit"
 alias :bd="exit"
-alias python="python3"
+alias pip="python -m pip"
+alias tf="terraform"
+alias repos="cd $REPOS"
+alias hg="history | grep"
+alias agenda="gcalcli agenda today tomorrow --details title --details end"
 
-## Common API Endpoints
-export AUTH_REST="https://auth.api.goforward.com"
-export MONEY_REST="https://money.api.goforward.com"
-export WORKFLOW_REST="https://workflow.api.goforward.com"
+alias tmux-start='sesh connect "$(sesh list -i | gum filter --limit 1 --placeholder "Pick a sesh" --prompt="⚡")"'
 
-command rbenv rehash 2>/dev/null
-rbenv() {
-  local command
-  command="${1:-}"
-  if [ "$#" -gt 0 ]; then
-    shift
-  fi
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
 
-  case "$command" in
-  rehash|shell)
-    eval "$(rbenv "sh-$command" "$@")";;
-  *)
-    command rbenv "$command" "$@";;
-  esac
-}
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+
+bindkey '^[[A' up-line-or-beginning-search    # Up arrow
+bindkey '^[[B' down-line-or-beginning-search  # Down arrow
+
+
+## ngrok custom setup ##
+if command -v ngrok &>/dev/null; then
+    eval "$(ngrok completion)"
+fi
+
+set -o vi 
+export TERM="xterm-256color"
+
+# command rbenv rehash 2>/dev/null
+# rbenv() {
+#   local command
+#   command="${1:-}"
+#   if [ "$#" -gt 0 ]; then
+#     shift
+#   fi
+# 
+#   case "$command" in
+#   rehash|shell)
+#     eval "$(rbenv "sh-$command" "$@")";;
+#   *)
+#     command rbenv "$command" "$@";;
+#   esac
+# }
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 alias vsc="code ."
 export PATH="/usr/local/mysql/bin:$PATH"
@@ -52,19 +62,14 @@ export PATH="/usr/local/mysql/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+source $(brew --prefix nvm)/nvm.sh
 
 ####################################################################################################
 # Python Custom Setup #
 ####################################################################################################
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
-####################################################################################################
-# Airport Custom Setup #
-####################################################################################################
-
-ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/local/bin/airport
+# eval "$(pyenv init -)"
 
 ####################################################################################################
 # ngrok Custom Setup #
@@ -74,22 +79,14 @@ export PATH="$PATH:/usr/local/bin/ngrok"
 
 ####################################################################################################
 
-# This likely can be deleted if you are no longer using Papercups
-# source $(brew --prefix asdf)/asdf.sh
-# export PATH=/usr/local/opt/openssl@1.1/bin:$PATH
-
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-# export PATH="${GOROOT}/libexec/bin:$PATH"
-
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/williamgoniprow/.oh-my-zsh"
+# export ZSH="/Users/williamgoniprow/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="af-magic"
+# ZSH_THEME="af-magic"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -151,9 +148,9 @@ ZSH_THEME="af-magic"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+# plugins=(git)
 
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -182,12 +179,24 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/local/bin/terraform terraform
+complete -o nospace -C /opt/homebrew/bin/terraform terraform
 
-RPROMPT='[%F{green}%D{%y/%m/%f} |%@%f]'
+eval "$(zoxide init zsh)"
+eval "$(starship init zsh)"
+
+# RPROMPT='[%F{green}%D{%y/%m/%f} |%@%f]'
 
 
 # Added by Amplify CLI binary installer
 export PATH="$HOME/.amplify/bin:$PATH"
 
 [[ -s "/Users/williamgoniprow/.gvm/scripts/gvm" ]] && source "/Users/williamgoniprow/.gvm/scripts/gvm"
+
+export PATH="$HOME/.rbenv/bin:$PATH"
+# Added by `rbenv init` on Mon Jan  6 13:10:20 PST 2025
+eval "$(rbenv init - --no-rehash zsh)"
+
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"

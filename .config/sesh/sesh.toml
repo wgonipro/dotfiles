@@ -1,0 +1,28 @@
+[[session]]
+name = "Server"
+path = "~/Repos"
+
+[[session]]
+name = "Backend"
+path = "~/Repos/arc-api"
+
+[[session]]
+name = "Frontend"
+path = "~/Repos/arc-web"
+
+[[session]]
+name = "Infra"
+path = "~/Repos/infrastructure"
+
+[[session]]
+name = "Feedback"
+path = "~/Repos/feeback"
+
+[[session]]
+name = "Playground"
+path = "~/Repos/playground"
+
+[[session]]
+name = "tmux config"
+path = "~/.config/tmux"
+command = "vim ~/.config/tmux/tmux.conf"
