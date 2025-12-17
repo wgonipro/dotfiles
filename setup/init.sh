@@ -1,6 +1,7 @@
 ##TODO
 
 # tmux
+#   tpm
 # sesh
 # zsh
 # nu
