@@ -50,8 +50,6 @@ if command -v ngrok &>/dev/null; then
     eval "$(ngrok completion)"
 fi
 
-# export TERM="xterm-256color"
-
 # command rbenv rehash 2>/dev/null
 # rbenv() {
 #   local command
