@@ -11,16 +11,29 @@ export PATH="/usr/local/opt/nodejs:${PATH}"
 export REPOS="/Users/williamgoniprow/Repos"
 export PATH="$PATH:/usr/local/bin/docker"
 export PATH="$PATH:$HOME/go/bin/grpc-server-scaffold"
+export EZA_CONFIG_DIR="$HOME/.config/eza"
+
+## linear
+export LINEAR_API_KEY=$(cat ~/.secret/linear)
+export LINEAR_ISSUE_SORT="priority"
+
 alias cd_repos="cd $REPOS"
 alias :q="exit"
 alias :bd="exit"
-alias pip="python -m pip"
+alias python="python3"
+alias pip="python3 -m pip"
 alias tf="terraform"
 alias repos="cd $REPOS"
 alias hg="history | grep"
 alias agenda="gcalcli agenda today tomorrow --details title --details end"
+alias gcal="gcalcli"
+alias ls="eza --icons --color=always --git"
 
 alias tmux-start='sesh connect "$(sesh list -i | gum filter --limit 1 --placeholder "Pick a sesh" --prompt="⚡")"'
+
+alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+
+set -o vi
 
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
@@ -37,8 +50,7 @@ if command -v ngrok &>/dev/null; then
     eval "$(ngrok completion)"
 fi
 
-set -o vi 
-export TERM="xterm-256color"
+# export TERM="xterm-256color"
 
 # command rbenv rehash 2>/dev/null
 # rbenv() {
@@ -177,9 +189,18 @@ export PATH="$PATH:/usr/local/bin/ngrok"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+#
+
+# Load zsh-autosuggestions
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
+
+# history setup
+setopt SHARE_HISTORY
+HISTFILE=$HOME/.zhistory
+setopt HIST_EXPIRE_DUPS_FIRST
 
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
@@ -200,3 +221,4 @@ export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init - zsh)"
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
