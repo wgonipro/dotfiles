@@ -49,6 +49,9 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' 
 " Markdown
 Plug 'preservim/vim-markdown'
 
+" BufOnly
+Plug 'schickling/vim-bufonly'
+
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 
@@ -105,6 +108,11 @@ set re=2
 au BufRead,BufNewFile *.txt syntax match StrikeoutMatch /\~\~.*\~\~/
 hi def StrikeoutColor ctermbg=black ctermfg=grey guibg=darkblue guifg=blue
 hi link StrikeoutMatch StrikeoutColor
+
+" Fugitive Conflict Resolution
+nnoremap <leader>gd :Gvdiff<CR>
+nnoremap gdh :diffget //2<CR>
+nnoremap gdl :diffget //3<CR>
 
 " color scheme
 " colo iceberg
