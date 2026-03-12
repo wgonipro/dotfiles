@@ -46,6 +46,9 @@ Plug 'github/copilot.vim'
 " Markdown Preview
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
 
+" Markdown
+Plug 'preservim/vim-markdown'
+
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 
@@ -65,6 +68,10 @@ let g:go_fmt_command = "goimports"
 
 " automatically highlight variable your cursor is on
 let g:go_auto_sameids = 0
+
+" markdown
+let g:vim_markdown_conceal = 1
+set conceallevel=2
 
 " syntax highlighting
 let g:go_highlight_types = 1

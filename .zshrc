@@ -3,8 +3,8 @@ compinit
 export PATH="$PATH:/opt/homebrew/bin/brew"
 export GITHUB_USERNAME=wgonipro
 export HOMEBREW_GITHUB_API_TOKEN=$(cat ~/.secret/gh)
-export GH_TOKEN=$HOMEBREW_GITHUB_API_TOKEN
-export GITHUB_TOKEN=$GH_TOKEN
+# export GH_TOKEN=$HOMEBREW_GITHUB_API_TOKEN
+# export GITHUB_TOKEN=$GH_TOKEN
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 export NGROK_URL="https://worpinog.ngrok.app"
 export PATH="/usr/local/opt/nodejs:${PATH}"
@@ -49,6 +49,8 @@ bindkey '^[[B' down-line-or-beginning-search  # Down arrow
 if command -v ngrok &>/dev/null; then
     eval "$(ngrok completion)"
 fi
+
+# export TERM="xterm-256color"
 
 # command rbenv rehash 2>/dev/null
 # rbenv() {
@@ -200,12 +202,6 @@ setopt SHARE_HISTORY
 HISTFILE=$HOME/.zhistory
 setopt HIST_EXPIRE_DUPS_FIRST
 
-eval "$(zoxide init zsh)"
-eval "$(starship init zsh)"
-
-# RPROMPT='[%F{green}%D{%y/%m/%f} |%@%f]'
-
-
 # Added by Amplify CLI binary installer
 export PATH="$HOME/.amplify/bin:$PATH"
 
@@ -220,3 +216,10 @@ export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init - zsh)"
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+eval "$(zoxide init zsh)"
+
+# Define a base zle-keymap-select so starship wraps a no-op instead of potentially itself
+function zle-keymap-select() { }
+zle -N zle-keymap-select
+eval "$(starship init zsh)"
