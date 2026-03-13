@@ -109,10 +109,15 @@ au BufRead,BufNewFile *.txt syntax match StrikeoutMatch /\~\~.*\~\~/
 hi def StrikeoutColor ctermbg=black ctermfg=grey guibg=darkblue guifg=blue
 hi link StrikeoutMatch StrikeoutColor
 
+let mapleader = " "
+
 " Fugitive Conflict Resolution
 nnoremap <leader>gd :Gvdiff<CR>
 nnoremap gdh :diffget //2<CR>
 nnoremap gdl :diffget //3<CR>
+
+nmap <leader>mp <Plug>MarkdownPreview
+nmap <leader>ms <Plug>MarkdownPreviewStop
 
 " color scheme
 " colo iceberg
