@@ -28,6 +28,7 @@ alias hg="history | grep"
 alias agenda="gcalcli agenda today tomorrow --details title --details end"
 alias gcal="gcalcli"
 alias ls="eza --icons --color=always --git"
+alias cnv_cmt="cat repos/conventional-commits.txt"
 
 alias tmux-start='sesh connect "$(sesh list -i | gum filter --limit 1 --placeholder "Pick a sesh" --prompt="⚡")"'
 
